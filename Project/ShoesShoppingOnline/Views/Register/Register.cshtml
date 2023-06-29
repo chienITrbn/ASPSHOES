@@ -1,0 +1,83 @@
+﻿@model ShoesShoppingOnline.Models.ManagerAccountClient.CombineAccountModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="shopping-cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="location">
+                    <ul>
+                        <li><a href="@Url.Action("Index","Home")" title="go to homepage">Home<span>/</span></a>  </li>
+                        <li><strong>Register page</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="login-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center">
+                    <div class="login">
+                        <div class="login-form-container">
+                            <div class="login-text">
+                                <h2>Register</h2>
+                                <span>Please fill in the registration form below.</span>
+                            </div>
+                            <div class="login-form">
+                            @using (Html.BeginForm("Register", "Register", FormMethod.Post))
+                            {
+                                    <div class="form-group">
+                                    @Html.LabelFor(model => model.Register.Email)
+                                    @Html.TextBoxFor(model => model.Register.Email, new { @class = "form-control", placeholder = "Email" })
+                                    @Html.ValidationMessageFor(model => model.Register.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                    @Html.LabelFor(model => model.Register.Name)
+                                    @Html.TextBoxFor(model => model.Register.Name, new { @class = "form-control", placeholder = "Full Name" })
+                                    @Html.ValidationMessageFor(model => model.Register.Name, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                    @Html.LabelFor(model => model.Register.PhoneNumber)
+                                    @Html.TextBoxFor(model => model.Register.PhoneNumber, new { @class = "form-control", placeholder = "Phone Number" })
+                                    @Html.ValidationMessageFor(model => model.Register.PhoneNumber, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                    @Html.LabelFor(model => model.Register.Address)
+                                    @Html.TextAreaFor(model => model.Register.Address, new { @class = "form-control", placeholder = "Address" })
+                                    @Html.ValidationMessageFor(model => model.Register.Address, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                    @Html.LabelFor(model => model.Register.Password)
+                                    @Html.PasswordFor(model => model.Register.Password, new { @class = "form-control", placeholder = "Password" })
+                                    @Html.ValidationMessageFor(model => model.Register.Password, "", new { @class = "text-danger" })
+                                    </div>                                    
+                                    <div class="form-group">
+                                    @Html.LabelFor(model => model.Register.PasswordConfirmation)
+                                    @Html.PasswordFor(model => model.Register.PasswordConfirmation, new { @class = "form-control", placeholder = "Password" })
+                                    @Html.ValidationMessageFor(model => model.Register.PasswordConfirmation, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="button-box">
+                                        <button type="submit" class="default-btn">Register</button>
+                                    </div>
+                            }
+
+                            <p class="mb-5 pb-lg-2" style="color: #393f81;">
+                                If you have an account, <a href="@Url.Action("Login", "Login")" style="color: #e03550;">
+                                    log in here
+                                </a>
+                            </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

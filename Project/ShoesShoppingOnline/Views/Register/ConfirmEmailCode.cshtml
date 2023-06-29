@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "ConfirmEmailCode";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="shopping-cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="location">
+                    <ul>
+                        <li><a href="@Url.Action("Index","Home")" title="go to homepage">Home<span>/</span></a>  </li>
+                        <li><strong>Confirm page</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="login-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center">
+                    <div class="login">
+                        <div class="login-form-container">
+                            <div class="login-text">
+                                <h2>Confirm Code</h2>
+                                <span>Please Enter your code details below.</span>
+                            </div>
+                            <div class="login-form">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @using (Html.BeginForm("ConfirmEmailCode", "Register", FormMethod.Post))
+                                {
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Enter your code..."name="Code" />
+                                    </div>
+                                @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                                {
+                                    <span class="text-danger">@ViewBag.ErrorMessage</span>
+                                }
+                                    <div class="button-box">
+                                        <button type="submit" class="default-btn">Confirm</button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

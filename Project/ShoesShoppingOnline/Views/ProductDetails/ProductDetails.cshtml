@@ -1,0 +1,153 @@
+﻿@model ShoesShoppingOnline.Models.DataModel.ProductModel
+@{
+    ViewData["Title"] = "ProductDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ShoesShoppingOnline.Models.DataModel.PRN211_HS160974Context context = new ShoesShoppingOnline.Models.DataModel.PRN211_HS160974Context();
+}
+
+<div class="Single-product-location home2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="location">
+                    <ul>
+                        <li><a href="@Url.Action("Index","Home")" title="go to homepage">Home<span>/</span></a>  </li>
+                        <li><strong> @Model.Name</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- single product area end -->
+<!-- single product details start -->
+<div class="single-product-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="single-product-img tab-content">
+                    <div class="single-pro-main-image tab-pane active" id="pro-large-img-1">
+                        <a href="#"><img class="optima_zoom" src="@Model.Image" data-zoom-image="@Model.Image" alt="optima" /></a>
+                    </div>
+                    <div class="single-pro-main-image tab-pane" id="pro-large-img-2">
+                        <a href="#"><img class="optima_zoom" src="~/dataclient/img/product/2.png" data-zoom-image="img/product/2.png" alt="optima" /></a>
+                    </div>
+                    <div class="single-pro-main-image tab-pane" id="pro-large-img-3">
+                        <a href="#"><img class="optima_zoom" src="~/dataclient/img/product/8.png" data-zoom-image="img/product/8.png" alt="optima" /></a>
+                    </div>
+                    <div class="single-pro-main-image tab-pane" id="pro-large-img-4">
+                        <a href="#"><img class="optima_zoom" src="~/dataclient/img/product/1.png" data-zoom-image="img/product/1.png" alt="optima" /></a>
+                    </div>
+                    <div class="single-pro-main-image tab-pane" id="pro-large-img-5">
+                        <a href="#"><img class="optima_zoom" src="~/dataclient/img/product/9.png" data-zoom-image="img/product/9.png" alt="optima" /></a>
+                    </div>
+                </div>
+                <div class="product-page-slider">
+                    <div class="single-product-slider">
+                        <a href="#pro-large-img-1" data-toggle="tab">
+                            <img src="~/dataclient/img/product/28.png" alt="">
+                        </a>
+                    </div>
+                    <div class="single-product-slider">
+                        <a href="#pro-large-img-2" data-toggle="tab">
+                            <img src="~/dataclient/img/product/30.png" alt="">
+                        </a>
+                    </div>
+                    <div class="single-product-slider">
+                        <a href="#pro-large-img-3" data-toggle="tab">
+                            <img src="~/dataclient/img/product/29.png" alt="">
+                        </a>
+                    </div>
+                    <div class="single-product-slider">
+                        <a href="#pro-large-img-4" data-toggle="tab">
+                            <img src="~/dataclient/img/product/31.png" alt="">
+                        </a>
+                    </div>
+                    <div class="single-product-slider">
+                        <a href="#pro-large-img-5" data-toggle="tab">
+                            <img src="~/dataclient/img/product/29.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="single-product-details">
+                    <a href="#" class="product-name">@Model.Name</a>
+                    <div class="list-product-info">
+                        <div class="price-rating">
+                            <div class="ratings">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                                <a href="#" class="review">1 Review(s)</a>
+                                <a href="#" class="add-review">Add Your Review</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="avalable">
+                        <p>Availability:<span> In stock</span></p>
+                    </div>
+                    <div class="item-price">
+                        <span>@Model.Price</span>
+                    </div>
+                    <div class="single-product-info">
+                        <p>@Model.Description</p>
+                        <div class="share">
+                            <img src="~/dataclient/img/product/share.png" alt="">
+                        </div>
+                    </div>
+                    <div class="action">
+                        <ul class="add-to-links">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-heart"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-refresh"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-envelope"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="select-catagory">
+                        <div class="size-select">
+                            <label class="required">
+                                <em>*</em> Size
+                            </label>
+                            <div class="input-box">
+                                <select id="select-2">
+                                    <option value="">-- Please Select --</option>
+                                    @foreach(var size in context.SizeHs160974s.Where(s => s.Pid == Model.ProductId).ToList())
+                                    {
+                                        <option value="@size.SizeId">@size.SizeName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart-item">
+                        <div class="price-box">
+                            <span>$170</span>
+                        </div>
+                        <div class="single-cart">
+                            <div class="cart-plus-minus">
+                                <label>Qty: </label>
+                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="0">
+                            </div>
+                            <button class="cart-btn">Add to cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
