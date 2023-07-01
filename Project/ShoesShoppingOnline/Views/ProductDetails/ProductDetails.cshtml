@@ -142,7 +142,7 @@
                                 <label>Qty: </label>
                                 <input class="cart-plus-minus-box" type="text" name="qtybutton" value="0">
                             </div>
-                            <button class="cart-btn">Add to cart</button>
+                            <a href="@Url.Action("Cart","AddToCart")?Pid=@Model.ProductId&sizeID=" class="cart-btn">Add to cart</a>
                         </div>
                     </div>
                 </div>
@@ -151,3 +151,4 @@
     </div>
 </div>
 
+                                

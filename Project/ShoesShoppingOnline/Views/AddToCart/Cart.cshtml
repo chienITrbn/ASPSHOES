@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewData["Title"] = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="shopping-cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="location">
+                    <ul>
+                        <li><a href="index.html" title="go to homepage">Home<span>/</span></a>  </li>
+                        <li><strong> Shopping cart</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table-bordered table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="cart-item-img"></th>
+                                <th class="cart-product-name">Product Name</th>
+                                <th class="move-wishlist">Size</th>
+                                <th class="unit-price">Unit Price</th>
+                                <th class="quantity">Qty</th>
+                                <th class="subtotal">Subtotal</th>
+                                <th class="remove-icon"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <tr>
+                                <td class="cart-item-img">
+                                    <a href="single-product.html">
+                                        <img src="img/cart/3.png" alt="">
+                                    </a>
+                                </td>
+                                <td class="cart-product-name">
+                                    <a href="single-product.html">Cras neque metus</a>
+                                </td>
+                                <td class="quantity">
+                                    <span>35.5</span>
+                                </td>
+                                <td class="unit-price">
+                                    <span>$174.00</span>
+                                </td>
+                                <td class="quantity">
+                                    <button class="btn btn-light" onclick="decreaseQuantity()">-</button>
+                                    <span id="quantity">1</span>
+                                    <button class="btn btn-light" onclick="increaseQuantity()">+</button>
+                                </td>
+
+                                <td class="subtotal">
+                                    <span>$174.00</span>
+                                </td>
+                                <td class="remove-icon">
+                                    <a href="#">
+                                        <img src="img/cart/btn_remove.png" alt="">
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="shopping-button">
+                        <div class="continue-shopping">
+                            <button type="submit">continue shopping</button>
+                        </div>
+                        <div class="shopping-cart-left">
+                            <button type="submit">Clear Shopping Cart</button>
+                            <button type="submit">Update Shopping Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="totals">
+                    <p>subtotal <span>$1,540.00</span> </p>
+                    <h3>Grand Total <span>$1,540.00</span></h3>
+                    <div class="shopping-button">
+                        <button type="submit">proceed to checkout</button>
+                    </div>
+                    <a href="#">Checkout with Multiple Addresses</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section btnChangeQuantity{
+    <script>
+        function increaseQuantity() {
+            var quantityElement = document.getElementById("quantity");
+            var currentQuantity = parseInt(quantityElement.innerHTML);
+            var newQuantity = currentQuantity + 1;
+            quantityElement.innerHTML = newQuantity;
+        }
+
+        function decreaseQuantity() {
+            var quantityElement = document.getElementById("quantity");
+            var currentQuantity = parseInt(quantityElement.innerHTML);
+            if (currentQuantity > 1) {
+                var newQuantity = currentQuantity - 1;
+                quantityElement.innerHTML = newQuantity;
+            }
+        }
+    </script>
+}

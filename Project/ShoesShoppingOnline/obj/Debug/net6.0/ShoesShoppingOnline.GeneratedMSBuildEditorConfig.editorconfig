@@ -36,20 +36,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkQWRtaW5cX0xheW91dEFkbWluLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Summer2023/TuNT57/ASPSHOES/Project/ShoesShoppingOnline/Pages/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Summer2023/TuNT57/ASPSHOES/Project/ShoesShoppingOnline/Pages/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Summer2023/TuNT57/ASPSHOES/Project/ShoesShoppingOnline/Pages/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Summer2023/TuNT57/ASPSHOES/Project/ShoesShoppingOnline/Pages/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+[D:/Summer2023/TuNT57/ASPSHOES/Project/ShoesShoppingOnline/Views/AddToCart/Cart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRkVG9DYXJ0XENhcnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Summer2023/TuNT57/ASPSHOES/Project/ShoesShoppingOnline/Views/Home/Index.cshtml]
