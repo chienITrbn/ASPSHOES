@@ -15,7 +15,30 @@ namespace ShoesShoppingOnline.Interface
         }
         public ProductModel AddProduct(ProductModel product)
         {
-            throw new NotImplementedException();
+            var _product = new ProductHs160974
+            {
+                ProductId = product.ProductId,
+                BrandId = product.BrandId,
+                CategoryId = product.CategoryId,
+                CreatedAt = DateTime.UtcNow,
+                Description = product.Description,
+                Image = product.Image,
+                Name = product.Name,
+                Price = product.Price,
+            };
+            _context.ProductHs160974s.Add(_product);
+            _context.SaveChanges();
+            return new ProductModel 
+            {
+                ProductId = _product.ProductId,
+                BrandId = _product.BrandId,
+                CategoryId = _product.CategoryId,
+                CreatedAt = _product.CreatedAt,
+                Description = _product.Description,
+                Image = _product.Image,
+                Name = _product.Name,
+                Price = _product.Price,
+            };
         }
 
         public void DeleteProduct(int id)

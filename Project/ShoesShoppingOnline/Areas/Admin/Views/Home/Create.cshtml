@@ -1,0 +1,63 @@
+﻿@model ShoesShoppingOnline.Models.DataModel.ProductModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/SharedAdmin/_LayoutAdmin.cshtml";
+    ShoesShoppingOnline.Models.DataModel.PRN211_HS160974Context context = new ShoesShoppingOnline.Models.DataModel.PRN211_HS160974Context();
+}
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Create Product</h6>
+                @using (Html.BeginForm("Create", "Home", FormMethod.Post, new { id = "Create" }))
+                {
+                    <div class="mb-3">
+                        <label for="Name" class="form-label">Product Name</label>
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", id = "Name", aria_describedby = "emailHelp" })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-floating">
+                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", id = "floatingTextarea", style = "height: 150px;", placeholder = "Leave a Description here" })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        <label for="floatingTextarea">Description</label>
+                    </div>
+                    <br>
+                    <h6 class="mb-4">Category</h6>
+                    <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" name="CategoryId">
+                        <option selected>Open this select menu</option>
+                        @foreach (var cat in context.CategoryHs160974s.ToList())
+                        {
+                            <option value="@cat.Id">@cat.Name</option>
+                        }
+                    </select>
+                    <div class="mb-3">
+                        <label for="Price" class="form-label">Price</label>
+                        @Html.TextBoxFor(model => model.Price, new { @class = "form-control", id = "Price", aria_describedby = "emailHelp" })
+                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                    </div>
+                    <h6 class="mb-4">Brand</h6>
+                    <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" name="BrandId">
+                        <option selected>Open this select menu</option>
+                        @foreach (var brand in context.BrandHs160974s.ToList())
+                        {
+                            <option value="@brand.Id">@brand.Name</option>
+                        }
+                    </select>
+                    <div class="mb-3">
+                        <label for="Create" class="form-label">Create_at</label>
+                        @Html.TextBoxFor(model => model.CreatedAt, new { @class = "form-control", id = "Create", aria_describedby = "emailHelp", type = "date" })
+                        @Html.ValidationMessageFor(model => model.CreatedAt, "", new { @class = "text-danger" })
+                    </div>
+                    <h6 class="mb-4">Image</h6>
+                    <div class="mb-3">
+                        <input class="form-control bg-dark" type="file" id="Image" name="Image" required>
+                        @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
