@@ -25,7 +25,15 @@ namespace ShoesShoppingOnline.Areas.Admin.Controllers
         [Route("ManagerProduct")]
         public IActionResult ManagerProduct()
         {
-            var getAllProduct = _productRepository.getAllProduct();
+            if (TempData["SuccessMessage"] != null)
+            {
+                ViewBag.SuccessMessage = TempData["SuccessMessage"].ToString();
+            }
+            else if (TempData["CreateSuccess"] != null)
+            {
+                ViewBag.CreateSuccess = TempData["CreateSuccess"].ToString();
+            }
+            var getAllProduct = _productRepository.getAllProduct().OrderByDescending(d => d.CreatedAt);
             return View(getAllProduct);
         }
         [HttpGet]
@@ -43,9 +51,48 @@ namespace ShoesShoppingOnline.Areas.Admin.Controllers
             var validationResult = validator.Validate(model);
             if (validationResult.IsValid)
             {
-
+                _productRepository.AddProduct(model);
+                TempData["CreateSuccess"] = "Create Successfully!";
+                return RedirectToAction("ManagerProduct");
             }
             return View(model);
+        }
+
+        [HttpGet]
+        [Route("Edit")]
+        public IActionResult Edit(int Pid)
+        {
+            var productById = _productRepository.getProductById(Pid);
+            if (productById == null)
+            {
+                return NotFound();
+            }
+            return View(productById);
+        }        
+        [HttpPost]
+        [Route("Edit")]
+        public IActionResult Edit(ProductModel model,int Pid)
+        {
+            var validator = new ProductValidator();
+            var validationResult = validator.Validate(model);
+            if (validationResult.IsValid)
+            {
+                _productRepository.UpdateProduct(model,Pid);
+                TempData["SuccessMessage"] = "Edit Successfully!";
+                return RedirectToAction("ManagerProduct");
+            }
+            foreach (var error in validationResult.Errors)
+            {
+                ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+            }
+            return View(model);
+        }
+        [Route("Delete")]
+        public IActionResult Delete(int Pid)
+        {
+            _productRepository.DeleteProduct(Pid);
+            TempData["DeleteSuccessMessage"] = "Delete successful!";
+            return RedirectToAction("ManagerProduct");
         }
     }
 }

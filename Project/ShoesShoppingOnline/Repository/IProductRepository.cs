@@ -12,6 +12,6 @@ namespace ShoesShoppingOnline.Repository
 
         void DeleteProduct(int id);
 
-        void UpdateProduct(ProductModel product);
+        void UpdateProduct(ProductModel product,int Pid);
     }
 }

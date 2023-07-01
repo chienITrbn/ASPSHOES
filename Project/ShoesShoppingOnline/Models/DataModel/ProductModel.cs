@@ -10,7 +10,7 @@ namespace ShoesShoppingOnline.Models.DataModel
         public string Name { get; set; } = null!;
 
         [Required(ErrorMessage = "Description is required")]
-        [StringLength(20, MinimumLength = 20, ErrorMessage = "Description must have at least 20 characters")]
+        [MinLength(20, ErrorMessage = "Description must have at least 20 characters")]
         public string Description { get; set; } = null!;
 
         [Required(ErrorMessage = "Category ID is required")]

@@ -28,7 +28,7 @@ namespace ShoesShoppingOnline.Controllers.ClientUser
                 string userJson = JsonConvert.SerializeObject(checkExitsAcc);
                 HttpContext.Session.SetString("User", userJson);
                 if(checkExitsAcc.Role == 1) { return RedirectToAction("Index", "Home"); }
-                return RedirectToAction("Index", "Home", new { area = "" });
+                return RedirectToAction("Dashboard", "Home", new { area = "Admin" });
             }
             else
             {

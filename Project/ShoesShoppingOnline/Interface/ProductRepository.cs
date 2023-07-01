@@ -22,7 +22,7 @@ namespace ShoesShoppingOnline.Interface
                 CategoryId = product.CategoryId,
                 CreatedAt = DateTime.UtcNow,
                 Description = product.Description,
-                Image = product.Image,
+                Image = "/image/"+product.Image,
                 Name = product.Name,
                 Price = product.Price,
             };
@@ -43,7 +43,12 @@ namespace ShoesShoppingOnline.Interface
 
         public void DeleteProduct(int id)
         {
-            throw new NotImplementedException();
+            var _product = _context.ProductHs160974s.FirstOrDefault(p => p.ProductId == id);
+            if (_product != null)
+            {
+                _context.Remove(_product);
+                _context.SaveChanges();
+            }
         }
 
         public List<ProductModel> getAllProduct()
@@ -77,14 +82,30 @@ namespace ShoesShoppingOnline.Interface
                 Description = getProductById.Description,
                 Price = getProductById.Price,
                 ProductId = getProductById.ProductId,
-                Image = getProductById.Image,
+                Image = getProductById.Image
             };
         }
 
 
-        public void UpdateProduct(ProductModel product)
+        public void UpdateProduct(ProductModel product , int id)
         {
-            throw new NotImplementedException();
+            var _product = _context.ProductHs160974s.FirstOrDefault(p => p.ProductId == id);
+            if (_product == null)
+            {
+                throw new Exception();
+            }
+            else
+            {
+                _product.Name = product.Name;
+                _product.Description = product.Description;
+                _product.Price = product.Price;
+                _product.Image = product.Image;
+                _product.CategoryId = product.CategoryId;
+                _product.UpdatedAt = DateTime.Now;
+                _product.BrandId = product.BrandId;
+                _context.ProductHs160974s.Update(_product);
+                _context.SaveChanges();
+            }
         }
     }
 }
