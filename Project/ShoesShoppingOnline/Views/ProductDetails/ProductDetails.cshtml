@@ -123,7 +123,7 @@
                                 <em>*</em> Size
                             </label>
                             <div class="input-box">
-                                <select id="select-2">
+                                <select id="sizeId">
                                     <option value="">-- Please Select --</option>
                                     @foreach(var size in context.SizeHs160974s.Where(s => s.Pid == Model.ProductId).ToList())
                                     {
@@ -139,10 +139,12 @@
                         </div>
                         <div class="single-cart">
                             <div class="cart-plus-minus">
-                                <label>Qty: </label>
-                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="0">
+                                <div class="dec qtybutton"><</div>
+                                <label for="quantityInput">Qty: </label>
+                                <input id="quantityInput" class="cart-plus-minus-box" type="text" name="qtybutton" value="0">
+                                <div class="inc qtybutton">></div>
                             </div>
-                            <a href="@Url.Action("Cart","AddToCart")?Pid=@Model.ProductId&sizeID=" class="cart-btn">Add to cart</a>
+                            <a id="addToCartLink" href="@Url.Action("Cart","AddToCart")?Pid=@Model.ProductId&sizeID=" class="cart-btn">Add to cart</a>
                         </div>
                     </div>
                 </div>
@@ -151,4 +153,45 @@
     </div>
 </div>
 
-                                
+@section AddToCart{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var sizeId = document.getElementById('sizeId');
+            var quantityInput = document.getElementById('quantityInput');
+            var addToCartLink = document.getElementById('addToCartLink');
+            var plusButton = document.querySelector('.inc.qtybutton');
+            var minusButton = document.querySelector('.dec.qtybutton');
+            var selectedSizeId = "";
+
+            sizeId.addEventListener('change', function () {
+                selectedSizeId = this.value;
+                updateAddToCartLink();
+            });
+
+            plusButton.addEventListener('click', function (event) {
+                event.preventDefault(); // Ngăn chặn hành vi mặc định
+                var currentValue = parseInt(quantityInput.value);
+                var newValue = currentValue + 1;
+                quantityInput.value = newValue;
+                updateAddToCartLink(newValue);
+            });
+
+            minusButton.addEventListener('click', function (event) {
+                event.preventDefault(); // Ngăn chặn hành vi mặc định
+                var currentValue = parseInt(quantityInput.value);
+                var newValue = currentValue - 1;
+                if (newValue < 0) {
+                    newValue = 0;
+                }
+                quantityInput.value = newValue;
+                updateAddToCartLink(newValue);
+            });
+
+            function updateAddToCartLink(quantity) {
+                var quantityValue = quantityInput.value;
+                addToCartLink.href = '@Url.Action("Cart","AddToCart")?Pid=' + '@Model.ProductId' + '&sizeID=' + selectedSizeId + '&quantity=' + quantityValue;
+            }
+        });
+
+    </script>
+}

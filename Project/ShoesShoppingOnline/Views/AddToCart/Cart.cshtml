@@ -1,7 +1,8 @@
-﻿
+﻿@model ShoesShoppingOnline.Models.Cart.CartModel
 @{
     ViewData["Title"] = "Cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ShoesShoppingOnline.Models.DataModel.PRN211_HS160974Context context = new ShoesShoppingOnline.Models.DataModel.PRN211_HS160974Context();
 }
 
 <div class="shopping-cart">
@@ -32,36 +33,43 @@
                             </tr>
                         </thead>
                         <tbody class="text-center">
-                            <tr>
-                                <td class="cart-item-img">
-                                    <a href="single-product.html">
-                                        <img src="img/cart/3.png" alt="">
-                                    </a>
-                                </td>
-                                <td class="cart-product-name">
-                                    <a href="single-product.html">Cras neque metus</a>
-                                </td>
-                                <td class="quantity">
-                                    <span>35.5</span>
-                                </td>
-                                <td class="unit-price">
-                                    <span>$174.00</span>
-                                </td>
-                                <td class="quantity">
-                                    <button class="btn btn-light" onclick="decreaseQuantity()">-</button>
-                                    <span id="quantity">1</span>
-                                    <button class="btn btn-light" onclick="increaseQuantity()">+</button>
-                                </td>
+                            @foreach(var item in Model._items)
+                            {
+                                <tr>
+                                    <td class="cart-item-img">
+                                        <a href="single-product.html">
+                                            <img src="@item.Product.Image" alt="" style="width: 100px; height: 100px;">
+                                        </a>
+                                    </td>
 
-                                <td class="subtotal">
-                                    <span>$174.00</span>
-                                </td>
-                                <td class="remove-icon">
-                                    <a href="#">
-                                        <img src="img/cart/btn_remove.png" alt="">
-                                    </a>
-                                </td>
-                            </tr>
+                                    <td class="cart-product-name">
+                                        <a href="single-product.html">@item.Product.Name</a>
+                                    </td>
+                                    <td class="quantity">
+                                        @{
+                                            var sizeName = context.SizeHs160974s.Where(s => s.Pid == item.Product.ProductId).FirstOrDefault();
+                                        }
+                                        <span>@sizeName.SizeName</span>
+                                    </td>
+                                    <td class="unit-price">
+                                        <span>@item.Product.Price</span>
+                                    </td>
+                                    <td class="quantity">
+                                        <button class="btn btn-light" onclick="decreaseQuantity()">-</button>
+                                        <span id="quantity">@item.quantity</span>
+                                        <button class="btn btn-light" onclick="increaseQuantity()">+</button>
+                                    </td>
+
+                                    <td class="subtotal">
+                                        <span>$174.00</span>
+                                    </td>
+                                    <td class="remove-icon">
+                                        <a href="#">
+                                            <img src="img/cart/btn_remove.png" alt="">
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                     <div class="shopping-button">
