@@ -35,5 +35,9 @@ namespace ShoesShoppingOnline.Models.Cart
             PRN211_HS160974Context context = new PRN211_HS160974Context();
             return context.SizeHs160974s.FirstOrDefault(s => s.Pid == productId && s.SizeId == sizeId);
         }
+
+        public decimal ComputeTotalValue() => (decimal)_items.Sum(i => i.quantity * (i.Product.Price));
+
+        public void Clear() => _items.Clear();
     }
 }

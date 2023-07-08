@@ -8,6 +8,11 @@
 		public int CustomerId { get; set; }
 		public string PhoneNumber { get; set; }
 
+        public CustomerModel()
+        {
+            
+        }
+
         //public CustomerModel(int accountId, string fullName, string address, int customerId, string phoneNumber)
         //{
         //    AccountId = accountId;

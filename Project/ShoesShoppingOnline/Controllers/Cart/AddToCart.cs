@@ -1,6 +1,7 @@
 ﻿using Group4_GlassesShop.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using ShoesShoppingOnline.Interface;
 using ShoesShoppingOnline.Models.Cart;
 using ShoesShoppingOnline.Models.DataModel;
@@ -12,12 +13,14 @@ namespace ShoesShoppingOnline.Controllers.Cart
     public class AddToCart : Controller
     {
         public CartModel? cart { get; set; }
-        private readonly PRN211_HS160974Context _context;
         private IProductRepository _productRepository;
+        private readonly IOrderRepository _orderRepository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public AddToCart(PRN211_HS160974Context context,IProductRepository productRepository) {
-            _context = context;
+        public AddToCart(IProductRepository productRepository,IOrderRepository orderRepository , ICustomerRepository customerRepository) {
             _productRepository = productRepository;
+            _orderRepository = orderRepository;
+            _customerRepository = customerRepository;
         }
         public IActionResult Cart(int Pid, int sizeID, int quantity)
         {
@@ -30,5 +33,35 @@ namespace ShoesShoppingOnline.Controllers.Cart
             }
             return View(cart);
         }
+
+        public IActionResult Checkout(CartModel checkoutModel) {
+            string accountJson = HttpContext.Session.GetString("User");
+            var cart = HttpContext.Session.GetJson<CartModel>("cart");
+            var account = JsonConvert.DeserializeObject<AccountModel>(accountJson);
+            int accountId = account.AccountId;
+            var Customer = _customerRepository.GetCustomer(accountId);
+            var getOrder = new OrderModel
+            {               
+                OrderDate = DateTime.Now,
+                Customers = Customer,
+                TotalMoney = cart.ComputeTotalValue()
+            };
+            _orderRepository.AddNewOrder(getOrder,Customer);
+            Console.WriteLine(getOrder.OrderId);
+            foreach (var order in cart._items)
+            {
+                var orderDetails = new OrderDetailModel
+                {
+                    OrderId = getOrder.OrderId,
+                    SizeId = order.Size.SizeId,
+                    Quantity = order.quantity,
+                    Price = order.Product.Price*order.quantity
+                };
+                _orderRepository.AddOrderDetail(orderDetails);
+            }
+            return RedirectToAction("Index","Home");
+        }
+
+
     }
 }

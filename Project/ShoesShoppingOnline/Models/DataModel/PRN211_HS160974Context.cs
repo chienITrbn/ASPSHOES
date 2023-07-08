@@ -111,7 +111,9 @@ namespace ShoesShoppingOnline.Models.DataModel
                     .HasMaxLength(30)
                     .HasColumnName("fullName");
 
-                entity.Property(e => e.PhoneNumber).HasColumnName("phoneNumber");
+                entity.Property(e => e.PhoneNumber)
+                .HasMaxLength(11)
+                .HasColumnName("phoneNumber");
 
                 entity.HasOne(d => d.Account)
                     .WithMany(p => p.CustomersHs160974s)

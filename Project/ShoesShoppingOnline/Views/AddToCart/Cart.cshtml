@@ -47,7 +47,7 @@
                                     </td>
                                     <td class="quantity">
                                         @{
-                                            var sizeName = context.SizeHs160974s.Where(s => s.Pid == item.Product.ProductId).FirstOrDefault();
+                                            var sizeName = context.SizeHs160974s.Where(s => s.Pid == item.Product.ProductId && s.SizeId == item.Size.SizeId).FirstOrDefault();
                                         }
                                         <span>@sizeName.SizeName</span>
                                     </td>
@@ -87,12 +87,11 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="totals">
-                    <p>subtotal <span>$1,540.00</span> </p>
-                    <h3>Grand Total <span>$1,540.00</span></h3>
+                    <p>subtotal <span>@Model.ComputeTotalValue()</span> </p>
+                    <h3>Grand Total <span>@Model.ComputeTotalValue()</span></h3>
                     <div class="shopping-button">
-                        <button type="submit">proceed to checkout</button>
+                        <a href="@Url.Action("Checkout","AddToCart")">proceed to checkout</a>
                     </div>
-                    <a href="#">Checkout with Multiple Addresses</a>
                 </div>
             </div>
         </div>
