@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ShoesShoppingOnline.Models.DataModel.OrderModel>
+
+@{
+    ViewData["Title"] = "ManagerOrderController";
+    Layout = "~/Areas/Admin/Views/SharedAdmin/_LayoutAdmin.cshtml";
+}
+
+<div class="col-12">
+    <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4">Manager Product</h6>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Order Date</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Total Money</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.OrderId</th>
+                            <td>@item.OrderDate</td>
+                            <td>@item.Customers.FullName</td>
+                            <td>@item.TotalMoney</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

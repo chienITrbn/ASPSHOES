@@ -7,5 +7,7 @@ namespace ShoesShoppingOnline.Repository
         public void AddNewOrder(OrderModel orderModel,CustomerModel customerModel);
 
         public void AddOrderDetail(OrderDetailModel orderDetailModel);
+
+        public List<OrderModel> GetAllOrders();
     }
 }

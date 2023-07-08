@@ -3,7 +3,7 @@ using ShoesShoppingOnline.Models.DataModel;
 using ShoesShoppingOnline.Models.Validation;
 using ShoesShoppingOnline.Repository;
 
-namespace ShoesShoppingOnline.Areas.Admin.Controllers
+namespace ShoesShoppingOnline.Areas.Admin.Controllers.Dashboard
 {
     [Area("admin")]
     [Route("admin")]
@@ -11,7 +11,8 @@ namespace ShoesShoppingOnline.Areas.Admin.Controllers
     {
         private readonly IProductRepository _productRepository;
 
-        public HomeController(IProductRepository productRepository) {
+        public HomeController(IProductRepository productRepository)
+        {
             _productRepository = productRepository;
         }
 
@@ -38,7 +39,8 @@ namespace ShoesShoppingOnline.Areas.Admin.Controllers
         }
         [HttpGet]
         [Route("Create")]
-        public IActionResult Create() {
+        public IActionResult Create()
+        {
             return View(new ProductModel());
         }
 
@@ -68,16 +70,16 @@ namespace ShoesShoppingOnline.Areas.Admin.Controllers
                 return NotFound();
             }
             return View(productById);
-        }        
+        }
         [HttpPost]
         [Route("Edit")]
-        public IActionResult Edit(ProductModel model,int Pid)
+        public IActionResult Edit(ProductModel model, int Pid)
         {
             var validator = new ProductValidator();
             var validationResult = validator.Validate(model);
             if (validationResult.IsValid)
             {
-                _productRepository.UpdateProduct(model,Pid);
+                _productRepository.UpdateProduct(model, Pid);
                 TempData["SuccessMessage"] = "Edit Successfully!";
                 return RedirectToAction("ManagerProduct");
             }

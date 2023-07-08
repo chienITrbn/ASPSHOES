@@ -36,5 +36,17 @@ namespace ShoesShoppingOnline.Repository
             _context.OrderDetailsHs160974s.Add(getNewOrderDetail);
             _context.SaveChanges();
         }
+
+        public List<OrderModel> GetAllOrders()
+        {
+            var getAllListOrder = _context.OrdersHs160974s.Select(o => new OrderModel
+            {
+                OrderId=o.OrderId,
+                OrderDate=o.OrderDate,
+                CustomerId = o.CustomerId,
+                TotalMoney = o.TotalMoney
+            }).OrderByDescending(o => o.OrderDate);
+            return getAllListOrder.ToList();
+        }
     }
 }

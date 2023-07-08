@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ShoesShoppingOnline.Models.DataModel.OrderModel>
+
+@{
+    ViewData["Title"] = "ManagerOrder";
+    Layout = "~/Areas/Admin/Views/SharedAdmin/_LayoutAdmin.cshtml";
+    ShoesShoppingOnline.Models.DataModel.PRN211_HS160974Context context = new ShoesShoppingOnline.Models.DataModel.PRN211_HS160974Context();
+}
+<div class="col-12">
+    <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4">Manager Order</h6>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Order Date</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Total Money</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.OrderId</th>
+                            <td>@item.OrderDate</td>
+                            @{
+                                var cusName = context.CustomersHs160974s.SingleOrDefault(c => c.CustomerId == item.CustomerId);
+                            }
+                            <td>@cusName.FullName</td>
+                            <td>@item.TotalMoney</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

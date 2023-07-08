@@ -32,6 +32,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxNYW5hZ2VyUHJvZHVjdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Summer2023/TuNT57/ASPSHOES/Project/ShoesShoppingOnline/Areas/Admin/Views/ManagerOrder/ManagerOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWFuYWdlck9yZGVyXE1hbmFnZXJPcmRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Summer2023/TuNT57/ASPSHOES/Project/ShoesShoppingOnline/Areas/Admin/Views/Order/ManagerOrderController.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcT3JkZXJcTWFuYWdlck9yZGVyQ29udHJvbGxlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Summer2023/TuNT57/ASPSHOES/Project/ShoesShoppingOnline/Areas/Admin/Views/SharedAdmin/_LayoutAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkQWRtaW5cX0xheW91dEFkbWluLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
