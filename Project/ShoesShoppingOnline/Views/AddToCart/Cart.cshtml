@@ -4,14 +4,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ShoesShoppingOnline.Models.DataModel.PRN211_HS160974Context context = new ShoesShoppingOnline.Models.DataModel.PRN211_HS160974Context();
 }
+<style>
+    .quantity-input {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        width: 3rem; /* Thay đổi chiều rộng của ô nhập liệu */
+        background-color: #f8f9fa;
+        border-radius: 0.25rem;
+        border: 1px solid #ced4da;
+    }
 
+</style>
 <div class="shopping-cart">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="location">
                     <ul>
-                        <li><a href="index.html" title="go to homepage">Home<span>/</span></a>  </li>
+                        <li><a href="@Url.Action("Index","Home")" title="go to homepage">Home<span>/</span></a>  </li>
                         <li><strong> Shopping cart</strong></li>
                     </ul>
                 </div>
@@ -55,13 +67,16 @@
                                         <span>@item.Product.Price</span>
                                     </td>
                                     <td class="quantity">
-                                        <button class="btn btn-light" onclick="decreaseQuantity()">-</button>
-                                        <span id="quantity">@item.quantity</span>
-                                        <button class="btn btn-light" onclick="increaseQuantity()">+</button>
+                                        <a href="@Url.Action("ChangeQuantity","AddToCart")?Pid=@item.Product.ProductId&quantity=@(item.quantity-1)" class="quantity-btn" onclick="changeQuantity(event, -1)">
+                                            <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                                        </a>
+                                        <input type="text" class="quantity-input" value="@item.quantity">
+                                        <a href="@Url.Action("ChangeQuantity","AddToCart")?Pid=@item.Product.ProductId&quantity=@(item.quantity+1)" class="quantity-btn" onclick="changeQuantity(event, 1)">
+                                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                        </a>
                                     </td>
-
                                     <td class="subtotal">
-                                        <span>$174.00</span>
+                                        <span>@(item.Product.Price*item.quantity)</span>
                                     </td>
                                     <td class="remove-icon">
                                         <a href="#">

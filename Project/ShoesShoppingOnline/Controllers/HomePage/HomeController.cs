@@ -32,23 +32,18 @@ namespace ShoesShoppingOnline.Controllers.HomePage
 			return View(listManager);
 		}
 
-        //public ActionResult GetProductsByCategory(int cid)
-        //{
-        //    var products = (from p in db.Product_HS160974
-        //                    join c in db.Category_HS160974 on p.category_id equals c.id
-        //                    where p.category_id == cid
-        //                    select new
-        //                    {
-        //                        Id = p.ProductId,
-        //                        Name = p.name,
-        //                        CategoryName = p.category_id,
-        //                        Price = p.price,
-        //                        Image = p.image_product
-        //                    }).ToList();
+		public IActionResult GetProductByCategory(int cid)
+		{
+			var getProductByCategory = _productRepository.getProductsByCategory(cid);
+			return PartialView("_ProductByCategory", getProductByCategory);
+		}		
+		
+		public IActionResult GetProductByBrand(int bid)
+		{
+			var getProductByBrand = _productRepository.getProductsByBrand(bid);
+			return PartialView("_ProductByBrand", getProductByBrand);
+		}
 
-        //    var category = _categoryRepository?.name ?? "unknown";
 
-        //    return Json(new { Products = products, Category = category }, JsonRequestBehavior.AllowGet);
-        //}
     }
 }

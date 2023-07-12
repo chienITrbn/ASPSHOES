@@ -34,6 +34,18 @@ namespace ShoesShoppingOnline.Controllers.Cart
             return View(cart);
         }
 
+        public IActionResult ChangeQuantity(int Pid, int quantity)
+        {
+            ProductModel? product = _productRepository.getProductById(Pid);
+            if (product != null)
+            {
+                cart = HttpContext.Session.GetJson<CartModel>("cart");
+                cart.ChangeQuantity(product, quantity);
+                HttpContext.Session.SetJon("cart", cart);
+            }
+            return View("Cart", cart);
+        }
+
         public IActionResult Checkout(CartModel checkoutModel) {
             string accountJson = HttpContext.Session.GetString("User");
             var cart = HttpContext.Session.GetJson<CartModel>("cart");
@@ -58,6 +70,7 @@ namespace ShoesShoppingOnline.Controllers.Cart
                     Price = order.Product.Price*order.quantity
                 };
                 _orderRepository.AddOrderDetail(orderDetails);
+                HttpContext.Session.Remove("cart");
             }
             return RedirectToAction("Index","Home");
         }

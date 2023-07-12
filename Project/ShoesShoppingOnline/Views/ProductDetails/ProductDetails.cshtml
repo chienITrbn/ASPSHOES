@@ -127,21 +127,18 @@
                                     <option value="">-- Please Select --</option>
                                     @foreach(var size in context.SizeHs160974s.Where(s => s.Pid == Model.ProductId).ToList())
                                     {
-                                        <option value="@size.SizeId">@size.SizeName</option>
+                                        <option value="@size.SizeId" data-quantity="@size.Quantity">@size.SizeName</option>
                                     }
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="cart-item">
-                        <div class="price-box">
-                            <span>$170</span>
-                        </div>
                         <div class="single-cart">
                             <div class="cart-plus-minus">
                                 <div class="dec qtybutton"><</div>
                                 <label for="quantityInput">Qty: </label>
-                                <input id="quantityInput" class="cart-plus-minus-box" type="text" name="qtybutton" value="0">
+                                <input id="quantityInput" class="cart-plus-minus-box" type="text" name="qtybutton" value="0" data-max-quantity="">
                                 <div class="inc qtybutton">></div>
                             </div>
                             <a id="addToCartLink" href="@Url.Action("Cart","AddToCart")?Pid=@Model.ProductId&sizeID=" class="cart-btn">Add to cart</a>
@@ -152,7 +149,6 @@
         </div>
     </div>
 </div>
-
 @section AddToCart{
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -169,27 +165,43 @@
             });
 
             plusButton.addEventListener('click', function (event) {
-                event.preventDefault(); // Ngăn chặn hành vi mặc định
+                event.preventDefault();
                 var currentValue = parseInt(quantityInput.value);
+                var maxQuantity = parseInt(sizeId.options[sizeId.selectedIndex].getAttribute('data-quantity'));
                 var newValue = currentValue + 1;
-                quantityInput.value = newValue;
-                updateAddToCartLink(newValue);
+                if (newValue <= maxQuantity) {
+                    quantityInput.value = newValue;
+                    updateAddToCartLink(newValue);
+                }
             });
 
             minusButton.addEventListener('click', function (event) {
-                event.preventDefault(); // Ngăn chặn hành vi mặc định
+                event.preventDefault();
                 var currentValue = parseInt(quantityInput.value);
                 var newValue = currentValue - 1;
-                if (newValue < 0) {
-                    newValue = 0;
+                if (newValue >= 0) {
+                    quantityInput.value = newValue;
+                    updateAddToCartLink(newValue);
                 }
-                quantityInput.value = newValue;
-                updateAddToCartLink(newValue);
             });
 
-            function updateAddToCartLink(quantity) {
+            addToCartLink.addEventListener('click', function (event) {
+                var quantityValue = parseInt(quantityInput.value);
+                var maxQuantity = parseInt(sizeId.options[sizeId.selectedIndex].getAttribute('data-quantity'));
+                if (quantityValue === 0) {
+                    event.preventDefault();
+                    alert("Số lượng sản phẩm phải lớn hơn 0");
+                } else if (quantityValue > maxQuantity) {
+                    event.preventDefault();
+                    alert("Số lượng sản phẩm không khả dụng. Vui lòng chọn số lượng nhỏ hơn hoặc bằng " + maxQuantity);
+                }
+            });
+
+            function updateAddToCartLink() {
                 var quantityValue = quantityInput.value;
                 addToCartLink.href = '@Url.Action("Cart","AddToCart")?Pid=' + '@Model.ProductId' + '&sizeID=' + selectedSizeId + '&quantity=' + quantityValue;
+                var maxQuantity = parseInt(sizeId.options[sizeId.selectedIndex].getAttribute('data-quantity'));
+                quantityInput.setAttribute('data-max-quantity', maxQuantity);
             }
         });
 

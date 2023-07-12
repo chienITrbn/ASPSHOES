@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ShoesShoppingOnline.Models.DataModel;
 using ShoesShoppingOnline.Repository;
+using System.Security.Cryptography;
 
 namespace ShoesShoppingOnline.Interface
 {
@@ -86,6 +87,45 @@ namespace ShoesShoppingOnline.Interface
             };
         }
 
+        public List<ProductModel> getProductsByBrand(int bid)
+        {
+            var getProductByBid = _context.ProductHs160974s.Where(p => p.BrandId == bid).Select(p => new ProductModel
+            {
+                ProductId = p.ProductId,
+                Name = p.Name,
+                BrandId = p.BrandId,
+                CategoryId = p.CategoryId,
+                Description = p.Description,
+                CreatedAt = p.CreatedAt,
+                Image = p.Image,
+                Price = p.Price
+            }).ToList();
+            if (getProductByBid != null)
+            {
+                return getProductByBid;
+            }
+            throw new InvalidOperationException("Not Found");
+        }
+
+        public List<ProductModel> getProductsByCategory(int cid)
+        {
+            var getProductByCid = _context.ProductHs160974s.Where(p => p.CategoryId == cid).Select(p => new ProductModel
+            {
+                ProductId = p.ProductId,
+                Name = p.Name,
+                BrandId = p.BrandId,
+                CategoryId = p.CategoryId,
+                Description = p.Description,
+                CreatedAt = p.CreatedAt,
+                Image = p.Image,
+                Price = p.Price
+            }).ToList();
+            if (getProductByCid != null)
+            {
+                return getProductByCid;
+            }
+            throw new InvalidOperationException("Not Found");
+        }
 
         public void UpdateProduct(ProductModel product , int id)
         {

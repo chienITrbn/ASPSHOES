@@ -6,6 +6,9 @@ namespace ShoesShoppingOnline.Repository
     {
         List<ProductModel> getAllProduct();
 
+        List<ProductModel> getProductsByCategory(int cid);
+        List<ProductModel> getProductsByBrand(int bid);
+
         ProductModel getProductById(int id);
 
         ProductModel AddProduct(ProductModel product);

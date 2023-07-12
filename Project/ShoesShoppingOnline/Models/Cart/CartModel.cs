@@ -30,6 +30,24 @@ namespace ShoesShoppingOnline.Models.Cart
             }
         }
 
+        public void ChangeQuantity(ProductModel product, int quantity)
+        {
+            Item? AddItem = _items.Where(p => p.Product.ProductId == product.ProductId).FirstOrDefault();
+            AddItem.quantity = quantity;
+
+            if (quantity == 0)
+
+            {
+
+                RemoveItem(product);
+
+            }
+        }
+        public void RemoveItem(ProductModel product)
+        {
+            _items.RemoveAll(p => p.Product.ProductId == product.ProductId);
+        }
+
         private SizeHs160974 GetSize(int productId, int sizeId)
         {
             PRN211_HS160974Context context = new PRN211_HS160974Context();
