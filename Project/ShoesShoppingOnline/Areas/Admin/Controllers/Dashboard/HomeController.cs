@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Group4_GlassesShop.Models.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using ShoesShoppingOnline.Models.DataModel;
 using ShoesShoppingOnline.Models.Validation;
 using ShoesShoppingOnline.Repository;
 
 namespace ShoesShoppingOnline.Areas.Admin.Controllers.Dashboard
 {
+    [AuthenAdmin]
     [Area("admin")]
     [Route("admin")]
     public class HomeController : Controller
@@ -15,14 +17,14 @@ namespace ShoesShoppingOnline.Areas.Admin.Controllers.Dashboard
         {
             _productRepository = productRepository;
         }
-
+        [AuthenAdmin]
         [Route("Dashboard")]
 
         public IActionResult Dashboard()
         {
             return View();
         }
-
+        [AuthenAdmin]
         [Route("ManagerProduct")]
         public IActionResult ManagerProduct()
         {
@@ -37,6 +39,7 @@ namespace ShoesShoppingOnline.Areas.Admin.Controllers.Dashboard
             var getAllProduct = _productRepository.getAllProduct().OrderByDescending(d => d.CreatedAt);
             return View(getAllProduct);
         }
+        [AuthenAdmin]
         [HttpGet]
         [Route("Create")]
         public IActionResult Create()
@@ -44,6 +47,7 @@ namespace ShoesShoppingOnline.Areas.Admin.Controllers.Dashboard
             return View(new ProductModel());
         }
 
+        [AuthenAdmin]
         [HttpPost]
         [Route("Create")]
         [ValidateAntiForgeryToken]
@@ -60,6 +64,7 @@ namespace ShoesShoppingOnline.Areas.Admin.Controllers.Dashboard
             return View(model);
         }
 
+        [AuthenAdmin]
         [HttpGet]
         [Route("Edit")]
         public IActionResult Edit(int Pid)
@@ -71,6 +76,8 @@ namespace ShoesShoppingOnline.Areas.Admin.Controllers.Dashboard
             }
             return View(productById);
         }
+
+        [AuthenAdmin]
         [HttpPost]
         [Route("Edit")]
         public IActionResult Edit(ProductModel model, int Pid)
@@ -89,6 +96,8 @@ namespace ShoesShoppingOnline.Areas.Admin.Controllers.Dashboard
             }
             return View(model);
         }
+
+        [AuthenAdmin]
         [Route("Delete")]
         public IActionResult Delete(int Pid)
         {

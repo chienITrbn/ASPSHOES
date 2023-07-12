@@ -539,3 +539,8 @@ D:\Summer2023\TuNT57\ASPSHOES\Project\ShoesShoppingOnline\obj\Debug\net6.0\Shoes
 D:\Summer2023\TuNT57\ASPSHOES\Project\ShoesShoppingOnline\obj\Debug\net6.0\ShoesShoppingOnline.genruntimeconfig.cache
 D:\Summer2023\TuNT57\ASPSHOES\Project\ShoesShoppingOnline\obj\Debug\net6.0\ref\ShoesShoppingOnline.dll
 D:\Summer2023\TuNT57\ASPSHOES\Project\ShoesShoppingOnline\bin\Debug\net6.0\bundleconfig.json
+D:\Summer2023\TuNT57\ASPSHOES\Project\ShoesShoppingOnline\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\Summer2023\TuNT57\ASPSHOES\Project\ShoesShoppingOnline\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\Summer2023\TuNT57\ASPSHOES\Project\ShoesShoppingOnline\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\Summer2023\TuNT57\ASPSHOES\Project\ShoesShoppingOnline\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+D:\Summer2023\TuNT57\ASPSHOES\Project\ShoesShoppingOnline\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll

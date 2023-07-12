@@ -1,4 +1,5 @@
 using DemoWebFirstMVCCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ShoesShoppingOnline.Interface;
 using ShoesShoppingOnline.Models.DataModel;
@@ -26,6 +27,9 @@ builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddDefaultTokenProviders()
+    .AddEntityFrameworkStores<PRN211_HS160974Context>();
 var app = builder.Build();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
