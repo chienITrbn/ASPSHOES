@@ -72,12 +72,18 @@ namespace ShoesShoppingOnline.Interface
             }
         }
 
-
+        /// <summary>
+        /// sửa dòng 86 return true
+        /// sửa dòng 88 return fasle
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public bool isExitsEmail(string email)
         {
             var isExitsEm = _context.AccountHs160974s.FirstOrDefault (a => a.Email == email);
             if (isExitsEm != null)
             {
+
                 return true;
             } return false;
         }
